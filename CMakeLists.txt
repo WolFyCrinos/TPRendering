@@ -24,6 +24,11 @@ file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS src/*)
 target_sources(${PROJECT_NAME} PRIVATE ${MY_SOURCES})
 target_include_directories(${PROJECT_NAME} PRIVATE src)
 
+# ---Add OpenGL Framework---
+add_subdirectory(opengl-framework)
+target_link_libraries(${PROJECT_NAME} PRIVATE opengl_framework::opengl_framework)
+gl_target_copy_folder(${PROJECT_NAME} res)
+
 # ---Add GLFW---
 add_subdirectory(lib/glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
