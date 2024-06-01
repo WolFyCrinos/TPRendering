@@ -24,13 +24,19 @@ file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS src/*)
 target_sources(${PROJECT_NAME} PRIVATE ${MY_SOURCES})
 target_include_directories(${PROJECT_NAME} PRIVATE src)
 
+# ---Add GLM---
+add_subdirectory(lib/glm)
+target_link_libraries(${PROJECT_NAME} PRIVATE glm)
+
 # ---Add GLFW---
 add_subdirectory(lib/glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
+
 # ---Add glad---
 add_library(glad lib/glad/src/glad.c)
 target_include_directories(glad PUBLIC lib/glad/include)
 target_link_libraries(${PROJECT_NAME} PRIVATE glad)
+
 # ---Add Dear ImGui---
 add_library(ImGui)
 target_sources(ImGui PRIVATE
