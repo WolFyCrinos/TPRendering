@@ -3,28 +3,30 @@
 // If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
 // Read online: https://github.com/ocornut/imgui/tree/master/docs
 
+#include <cstdio>
+
 #include "ImGuiWrapper.h"
 
 /// This is an example of how you would create windows and widgets with ImGui.
 /// Replace it with your own code!
 void example_imgui_windows()
 {
-    static bool show_demo_window    = true;
+    static bool show_demo_window    = false;
     static bool show_another_window = false;
     // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
     if (show_demo_window)
         ImGui::ShowDemoWindow(&show_demo_window);
 
     // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
-    {
+    /*{
         static float f       = 0.0f;
         static int   counter = 0;
 
-        ImGui::Begin("Hello, world!"); // Create a window called "Hello, world!" and append into it.
+        ImGui::Begin("Information"); // Create a window called "Hello, world!" and append into it.
 
-        ImGui::Text("This is some useful text.");          // Display some text (you can use a format strings too)
-        ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
-        ImGui::Checkbox("Another Window", &show_another_window);
+        //ImGui::Text("This is some useful text.");          // Display some text (you can use a format strings too)
+        //ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
+        //ImGui::Checkbox("Another Window", &show_another_window);
 
         ImGui::SliderFloat("float", &f, 0.0f, 1.0f); // Edit 1 float using a slider from 0.0f to 1.0f
 
@@ -35,7 +37,7 @@ void example_imgui_windows()
 
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         ImGui::End();
-    }
+    }*/
 
     // 3. Show another simple window.
     if (show_another_window) {
@@ -49,7 +51,7 @@ void example_imgui_windows()
 
 int main(int, char**)
 {
-    GLFWwindow* const window = ImGuiWrapper::create_window(1280, 720, "Simple ImGui Setup");
+    GLFWwindow* const window = ImGuiWrapper::create_window(1280, 720, "Look at my BEAUTIFUL RENDER ENGINE");
 
     // Main loop
     while (!glfwWindowShouldClose(window)) {
@@ -58,6 +60,9 @@ int main(int, char**)
         // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application.
         // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application.
         glfwPollEvents();
+        char newTitle[50];
+        sprintf(newTitle, "Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        glfwSetWindowTitle(window, newTitle);
 
         ImGuiWrapper::begin_frame();
         example_imgui_windows();
