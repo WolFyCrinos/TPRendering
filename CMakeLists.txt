@@ -23,6 +23,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS src/*)
 target_sources(${PROJECT_NAME} PRIVATE ${MY_SOURCES})
 target_include_directories(${PROJECT_NAME} PRIVATE src)
+target_include_directories(${PROJECT_NAME} PRIVATE res)
 
 # ---Add GLM---
 add_subdirectory(lib/glm)
@@ -31,6 +32,19 @@ target_link_libraries(${PROJECT_NAME} PRIVATE glm)
 # ---Add GLFW---
 add_subdirectory(lib/glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
+
+# ---Add tinyobjloader---
+add_subdirectory(lib/tinyobjectloader)
+target_include_directories(${PROJECT_NAME} PUBLIC lib/tinyobjectloader)
+
+# ---Add img---
+add_subdirectory(lib/img)
+target_include_directories(${PROJECT_NAME} PUBLIC lib/img/include)
+target_link_libraries(${PROJECT_NAME} PUBLIC img::img)
+
+# ---Add exe_path---
+add_subdirectory(lib/exe_path)
+target_link_libraries(${PROJECT_NAME} PRIVATE exe_path::exe_path)
 
 # ---Add glad---
 add_library(glad lib/glad/src/glad.c)
