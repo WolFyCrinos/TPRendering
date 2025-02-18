@@ -191,7 +191,7 @@ int main(int, char**)
         // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
         // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application.
         // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application.
-        glfwPollEvents();
+        //glfwPollEvents();
 
         // Title
         ImGuiWrapper::getTitle();
@@ -199,11 +199,13 @@ int main(int, char**)
         updateRandomSeeds(rSeed1, rSeed2);
 
         // ImGui Wrapper
-        glClearColor(.0f, .0f, .0f, .0f);
+        glClearColor(1.0f, .0f, .0f, .0f);
         //glClear(GL_COLOR_BUFFER_BIT);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         ImGuiWrapper::begin_frame();
+        example_imgui_windows();
+        ImGuiWrapper::end_frame(/*ImVec4(1.0f, .0f, .0f, 1.00f)*/);
 
         glm::mat4 const view_matrix = camera.view_matrix();
         glm::mat4 const projection_matrix = glm::infinitePerspective(glm::radians(45.f) /*field of view in radians*/, ImGuiWrapper::framebuffer_aspect_ratio() /*aspect ratio*/, 0.001f /*near plane*/);
@@ -237,9 +239,6 @@ int main(int, char**)
 
         cube_mesh.draw();
 
-        example_imgui_windows();
-
-        ImGuiWrapper::end_frame(/*ImVec4(1.0f, .0f, .0f, 1.00f)*/);
     }
 
     ImGuiWrapper::shutdown();

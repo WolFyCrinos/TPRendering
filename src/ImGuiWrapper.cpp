@@ -315,8 +315,8 @@ void end_frame(/*ImVec4 background_color*/)
         glfwMakeContextCurrent(backup_current_context);
     }
 
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glfwSwapBuffers(context().window);
+    //glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    //glfwSwapBuffers(context().window);
 }
 
 void shutdown()
